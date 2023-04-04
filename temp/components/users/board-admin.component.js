@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
+import UserService from "../../services/user.service";
+import EventBus from "../../common/EventBus";
 
-export default class BoardUser extends Component {
-  constructor(props) {
+export default class BoardAdmin extends Component {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -13,7 +13,7 @@ export default class BoardUser extends Component {
   }
 
   componentDidMount() {
-    UserService.getUserBoard().then(
+    UserService.getAdminBoard().then(
       response => {
         this.setState({
           content: response.data
@@ -29,7 +29,8 @@ export default class BoardUser extends Component {
             error.toString()
         });
 
-        if (error.response && error.response.status === 401) {
+        if (error.response && error.response.status === 401)
+        {
           EventBus.dispatch("logout");
         }
       }

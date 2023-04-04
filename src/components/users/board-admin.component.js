@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
+import UserService from "../../services/user.service";
+import EventBus from "../../common/EventBus";
 
 export default class BoardAdmin extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = {
@@ -29,7 +29,8 @@ export default class BoardAdmin extends Component {
             error.toString()
         });
 
-        if (error.response && error.response.status === 401) {
+        if (error.response && error.response.status === 401)
+        {
           EventBus.dispatch("logout");
         }
       }

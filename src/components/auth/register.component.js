@@ -4,10 +4,11 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 
 const required = value => {
-  if (!value) {
+  if (!value)
+  {
     return (
       <div className="alert alert-danger" role="alert">
         This field is required!
@@ -17,7 +18,8 @@ const required = value => {
 };
 
 const email = value => {
-  if (!isEmail(value)) {
+  if (!isEmail(value))
+  {
     return (
       <div className="alert alert-danger" role="alert">
         This is not a valid email.
@@ -27,7 +29,8 @@ const email = value => {
 };
 
 const vusername = value => {
-  if (value.length < 3 || value.length > 20) {
+  if (value.length < 3 || value.length > 20)
+  {
     return (
       <div className="alert alert-danger" role="alert">
         The username must be between 3 and 20 characters.
@@ -37,7 +40,8 @@ const vusername = value => {
 };
 
 const vpassword = value => {
-  if (value.length < 6 || value.length > 40) {
+  if (value.length < 6 || value.length > 40)
+  {
     return (
       <div className="alert alert-danger" role="alert">
         The password must be between 6 and 40 characters.
@@ -47,7 +51,7 @@ const vpassword = value => {
 };
 
 export default class Register extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -91,7 +95,8 @@ export default class Register extends Component {
 
     this.form.validateAll();
 
-    if (this.checkBtn.context._errors.length === 0) {
+    if (this.checkBtn.context._errors.length === 0)
+    {
       AuthService.register(
         this.state.username,
         this.state.email,

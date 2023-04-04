@@ -13,14 +13,6 @@ import BoardUser from "./components/users/board-user.component";
 import BoardModerator from "./components/users/board-moderator.component";
 import BoardAdmin from "./components/users/board-admin.component";
 import EventBus from "./common/EventBus";
-import authVerify from "./common/auth-verify";
-import Navbar from "./layout/Navbar"
-import TourList from "./pages/Tour";
-import Category from "./pages/Category";
-import EditTour from "./components/tours/EditTour";
-import ThemTour from "./components/tours/ThemTour";
-
-
 
 class App extends Component {
   constructor (props) {
@@ -41,6 +33,8 @@ class App extends Component {
     {
       this.setState({
         currentUser: user,
+        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
 
@@ -67,8 +61,7 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark p-md-1">
-          <Navbar />
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
             Booking Tour
           </Link>
@@ -78,6 +71,14 @@ class App extends Component {
                 Home
               </Link>
             </li>
+
+            {/*  {showModeratorBoard && (
+              <li className="nav-item">
+                <Link to={"/mod"} className="nav-link">
+                  Moderator Board
+                </Link>
+              </li>
+            )} */}
 
             {showAdminBoard && (
               <li className="nav-item">
@@ -124,13 +125,10 @@ class App extends Component {
               </li>
             </div>
           )}
-
         </nav>
 
         <div className="container mt-3">
-
           <Routes>
-
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -139,14 +137,10 @@ class App extends Component {
             <Route path="/user" element={<BoardUser />} />
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
-            <Route path="/tour" element={<TourList />} />
-            <Route path="/category" element={<Category />} />
-            <Route path="/ThemTour" element={<ThemTour />} />
-            <Route path="/EditTour/:id" element={<EditTour />} />
           </Routes>
         </div>
 
-        {/* <authVerify logOut={this.logOut} /> */}
+        {/* <AuthVerify logOut={this.logOut}/> */}
       </div>
     );
   }

@@ -3,12 +3,13 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 
-import { withRouter } from '../common/with-router';
+import { withRouter } from '../../common/with-router';
 
 const required = value => {
-  if (!value) {
+  if (!value)
+  {
     return (
       <div className="alert alert-danger" role="alert">
         This field is required!
@@ -18,7 +19,7 @@ const required = value => {
 };
 
 class Login extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -54,10 +55,11 @@ class Login extends Component {
 
     this.form.validateAll();
 
-    if (this.checkBtn.context._errors.length === 0) {
+    if (this.checkBtn.context._errors.length === 0)
+    {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
-          this.props.router.navigate("/profile");
+          this.props.router.navigate("/home");
           window.location.reload();
         },
         error => {
@@ -74,7 +76,8 @@ class Login extends Component {
           });
         }
       );
-    } else {
+    } else
+    {
       this.setState({
         loading: false
       });
