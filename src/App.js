@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { withRouter } from 'react-router-dom';
 
 import AuthService from "./services/auth.service";
 
@@ -17,8 +18,8 @@ import authVerify from "./common/auth-verify";
 import Navbar from "./layout/Navbar"
 import TourList from "./pages/Tour";
 import Category from "./pages/Category";
-import EditTour from "./components/tours/EditTour";
 import ThemTour from "./components/tours/ThemTour";
+import UpdateTour from "./components/tours/UpdateTour";
 
 
 
@@ -33,7 +34,6 @@ class App extends Component {
       currentUser: undefined,
     };
   }
-
   componentDidMount() {
     const user = AuthService.getCurrentUser();
 
@@ -64,7 +64,7 @@ class App extends Component {
 
   render() {
     const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-
+    const { match } = this.props;
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark p-md-1">
@@ -129,7 +129,7 @@ class App extends Component {
 
         <div className="container mt-3">
 
-          <Routes>
+          <Routes >
 
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
@@ -142,7 +142,7 @@ class App extends Component {
             <Route path="/tour" element={<TourList />} />
             <Route path="/category" element={<Category />} />
             <Route path="/ThemTour" element={<ThemTour />} />
-            <Route path="/EditTour/:id" element={<EditTour />} />
+            <Route path="/EditTour/:id" element={<UpdateTour />} />
           </Routes>
         </div>
 
@@ -152,4 +152,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default (App);
